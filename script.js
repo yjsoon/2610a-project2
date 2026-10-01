@@ -10,6 +10,7 @@ const POLL_MS = 15 * 1000;
 const SIREN_EVERY_MS = 8 * 1000;
 const TEST_MS = 6 * 1000;
 const WALK_MIN = 1, WALK_MAX = 20, WALK_DEFAULT = 5;
+const THEMES = ['auto', 'light', 'dark'];
 
 const LOAD = { SEA: 'Seats available', SDA: 'Standing room', LSD: 'Nearly full' };
 const TYPE = { SD: 'Single deck', DD: 'Double deck', BD: 'Bendy' };
@@ -257,6 +258,20 @@ function setWalk(minutes) {
   render();
 }
 
+// 'auto' follows the system light/dark setting; the stylesheet does the rest from data-theme.
+function setTheme(theme) {
+  if (!THEMES.includes(theme)) theme = 'auto';
+  if (theme === 'auto') delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = theme;
+  save('theme', theme);
+  $('themeBtn').textContent = 'Theme: ' + theme[0].toUpperCase() + theme.slice(1);
+  $('themeBtn').dataset.theme = theme;
+}
+
+$('themeBtn').addEventListener('click', e => {
+  setTheme(THEMES[(THEMES.indexOf(e.currentTarget.dataset.theme) + 1) % THEMES.length]);
+});
+
 $('walkLess').addEventListener('click', () => setWalk(walkMin - 1));
 $('walkMore').addEventListener('click', () => setWalk(walkMin + 1));
 
@@ -302,6 +317,7 @@ document.addEventListener('visibilitychange', () => {
   keepAwake();
 });
 
+setTheme(load('theme', 'auto'));
 if (soundWanted) armSound();
 keepAwake();
 refresh();
