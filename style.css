@@ -1,15 +1,45 @@
 :root {
+  color-scheme: light;
+  --bg: #f4f6f8;
+  --panel: #ffffff;
+  --line: #d5dce4;
+  --text: #0f1720;
+  --muted: #556274;
+  --ok: #047857;
+  --leave: #b45309;
+  --going: #0369a1;
+}
+/* Dark follows the system setting unless the theme button has forced light or dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1720;
+    --panel: #18232f;
+    --line: #2a3948;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --ok: #34d399;
+    --leave: #fbbf24;
+    --going: #7dd3fc;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #0f1720;
   --panel: #18232f;
   --line: #2a3948;
   --text: #f1f5f9;
   --muted: #94a3b8;
-  --accent: #34d399;
+  --ok: #34d399;
+  --leave: #fbbf24;
+  --going: #7dd3fc;
 }
+body { --accent: var(--ok); }
 body[data-state="run"] {
   --bg: #b30f1a;
   --panel: #8f0a14;
   --line: #d9404b;
+  --text: #ffffff;
   --muted: #ffd5d8;
   --accent: #ffffff;
 }
@@ -24,8 +54,8 @@ body {
   display: flex;
   justify-content: center;
 }
-body[data-state="leave"] { --accent: #fbbf24; }
-body[data-state="going"] { --accent: #7dd3fc; }
+body[data-state="leave"] { --accent: var(--leave); }
+body[data-state="going"] { --accent: var(--going); }
 body[data-state="run"] { animation: flash 1s steps(1) infinite; }
 @keyframes flash {
   0%   { background-color: #b30f1a; }
@@ -53,6 +83,8 @@ header { display: flex; align-items: center; gap: 12px; }
   border-radius: 10px;
   font-variant-numeric: tabular-nums;
 }
+.titles { flex: 1; }
+.theme { flex: none; padding: 8px 12px; font-size: .8rem; }
 .route { font-size: 1.05rem; font-weight: 600; }
 .stop { color: var(--muted); font-size: .85rem; margin-top: 2px; }
 
@@ -137,5 +169,5 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 [hidden] { display: none !important; }
 
 footer { color: var(--muted); font-size: .78rem; text-align: center; margin-top: auto; padding-top: 6px; }
-.warn { color: #fbbf24; }
+.warn { color: var(--leave); }
 body[data-state="run"] .warn { color: #fff; font-weight: 700; }
