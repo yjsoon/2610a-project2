@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1720">
+<title>Bus 13 · Aperia to Yio Chu Kang</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-state="loading">
+<main>
+  <header>
+    <div class="badge">13</div>
+    <div>
+      <div class="route">Aperia Mall → Yio Chu Kang MRT</div>
+      <div class="stop">Board at Aft Kallang Rd, Lavender St (stop 07371)</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div aria-live="polite">
+      <div class="verdict" id="verdict">Checking…</div>
+      <div class="verdict-sub" id="verdictSub">Getting live arrival times.</div>
+    </div>
+    <div class="label" id="targetLabel">Next bus</div>
+    <div class="countdown" id="countdown">–:––</div>
+    <div class="meta" id="nextMeta"></div>
+    <div class="missed" id="missed" hidden></div>
+    <button class="go" id="goBtn" hidden>I’m going</button>
+  </section>
+
+  <section class="row">
+    <div class="label">Bus after that</div>
+    <div>
+      <div class="after-time" id="afterTime">–</div>
+      <div class="after-meta" id="afterMeta"></div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="label" id="walkLabel">Walk to the stop</div>
+    <div class="stepper" role="group" aria-labelledby="walkLabel">
+      <button id="walkLess" aria-label="One minute less">−</button>
+      <output id="walkValue">5 min</output>
+      <button id="walkMore" aria-label="One minute more">+</button>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button id="soundBtn" aria-pressed="true">Alarm sound</button>
+    <button id="testBtn">Test alarm</button>
+  </div>
+
+  <footer>
+    <div id="status">Connecting…</div>
+    <div id="awake"></div>
+    <div>Live data from LTA via arrivelah. Times are estimates.</div>
+  </footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
